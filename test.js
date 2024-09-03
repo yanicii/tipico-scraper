@@ -3,10 +3,12 @@ const puppeteer = require('puppeteer');
 (async () => {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
-  await page.goto('https://news.ycombinator.com', {
-    waitUntil: 'networkidle2',
+  await page.goto("https://www.youpriboo.com/", {
+    waitUntil: "networkidle0",
   });
-  await page.pdf({ path: 'test.pdf', format: 'a4' });
-
+  const text = await page.evaluate(() => {
+    return document.querySelector(".mainnaviselected").textContent;
+  });
+  console.log(text.trim())
   await browser.close();
 })();
